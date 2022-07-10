@@ -7,10 +7,172 @@
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://kit.fontawesome.com/2f777012c0.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./index.css">
     </head>
     <body>
-        
+        <div class="container">
+            <header>
+                <div class="logo-container flex center">
+                    <a href="./index.html" aria-label="Link to Home Page">
+                        <img src="./assets/logo.png" alt="Logo Les petits plats" class="logo">
+                    </a>
+                </div>
+                <nav class="primary-nav flex column">
+                    <form action="" role="search" class="primary-search-form flex">
+                        <label id="searchbar-label" class="sr-only" for="searchbar">Search</label>
+                        <input type="text" id="searchbar" aria-labelledby="searchbar-label" placeholder="Recherchez une recette" class="pd">
+                        <button aria-label="Search recipes"><span class="sr-only">Search</span><i class="fas fa-search"></i></button>
+                    </form>
+                    <div class="selected-tags-container flex">
+
+                    </div>
+                    <div class="filters-container flex">
+                        <div class="filter-dropdown ingredients">
+                            <div class="filter-head flex pd">
+                                <p class="filter-name">Ingrédients</p>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="filter-content">
+                                <label id="ingredients-searchbar-label" for="ingredients-searchbar" class="sr-only">Search for ingredients</label>
+                                <input type="text" id="ingredients-searchbar" aria-labelledby="ingredients-searchbar-label" placeholder="Recherchez un ingrédient">
+                                <div class="filters-list">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-dropdown appareils">
+                            <div class="filter-head flex pd">
+                                <p class="filter-name">Appareils</p>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="filter-content">
+                                <label id="appareils-searchbar-label" for="appareils-searchbar" class="sr-only">Search for appareils</label>
+                                <input type="text" id="appareils-searchbar" aria-labelledby="appareils-searchbar-label" placeholder="Recherchez un appareil">
+                                <div class="filters-list">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filter-dropdown ustensiles">
+                            <div class="filter-head flex pd">
+                                <p class="filter-name">Ustensiles</p>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="filter-content">
+                                <label id="ustensiles-searchbar-label" for="ustensiles-searchbar" class="sr-only">Search for ustensils</label>
+                                <input type="text" id="ustensiles-searchbar" aria-labelledby="ustensiles-searchbar-label" placeholder="Recherchez un ustensile">
+                                <div class="filters-list">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <main class="main">
+                <section class="main-container grid">
+                    <article class="card">
+                        <div class="card-img-container">
+                            <img src="" alt="" class="card-img">
+                        </div>
+                        <div class="card-body pd">
+                            <div class="card-heading flex">
+                                <h3 class="card-title">Card Title</h3>
+                                <div class="card-time"><i class="fas fa-clock"></i> <span class="recipe-duration">40 min</span></div>
+                            </div>
+                            <div class="card-content flex">
+                                <div class="card-list">
+                                    <ul>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                    </ul>
+                                </div>
+                                <div class="card-description">
+
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-img-container">
+                            <img src="" alt="" class="card-img">
+                        </div>
+                        <div class="card-body pd">
+                            <div class="card-heading flex">
+                                <h3 class="card-title">Card Title</h3>
+                                <div class="card-time"><i class="fas fa-clock"></i> <span class="recipe-duration">40 min</span></div>
+                            </div>
+                            <div class="card-content flex">
+                                    <ul class="card-list">
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                    </ul>
+                                <div class="card-description">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi assumenda nobis nostrum qui. Est obcaecati reiciendis sapiente excepturi eos qui amet id delectus accusantium consequatur! Dignissimos aperiam sint facilis ipsum itaque? Totam expedita incidunt sed tempore recusandae, nam porro neque.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-img-container">
+                            <img src="" alt="" class="card-img">
+                        </div>
+                        <div class="card-body pd">
+                            <div class="card-heading flex">
+                                <h3 class="card-title">Card Title</h3>
+                                <div class="card-time"><i class="fas fa-clock"></i> <span class="recipe-duration">40 min</span></div>
+                            </div>
+                            <div class="card-content flex">
+                                <div class="card-list">
+                                    <ul>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                    </ul>
+                                </div>
+                                <div class="card-description">
+
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-img-container">
+                            <img src="" alt="" class="card-img">
+                        </div>
+                        <div class="card-body pd">
+                            <div class="card-heading flex">
+                                <h3 class="card-title">Card Title</h3>
+                                <div class="card-time"><i class="fas fa-clock"></i> <span class="recipe-duration">40 min</span></div>
+                            </div>
+                            <div class="card-content flex">
+                                <div class="card-list">
+                                    <ul>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                        <li><span class="list-item">stuff</span>: 40ml</li>
+                                    </ul>
+                                </div>
+                                <div class="card-description">
+
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+            </main>
+        </div>
         <script src="./JS/app.js"></script>
     </body>
 </html>

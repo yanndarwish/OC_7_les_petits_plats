@@ -1,0 +1,234 @@
+:root {
+    --clr-primary-1:#3282F7;
+    --clr-primary-2:#68D9A4;
+    --clr-primary-3:#ED6454;
+    --clr-bg:#E7E7E7;
+    --bd-radius: 5px;
+    --padding: 20px;
+}
+
+/* --------------------------- */
+/* --------RESET-------------- */
+/* --------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+*:focus {
+    outline: 2px solid blue;
+}
+
+body {
+    font-family:'DM Sans', sans-serif;
+}
+
+a {
+    width:fit-content;
+    z-index:100;
+    text-decoration: none;
+    color:black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-weight: 400;
+}
+
+img {
+    display:block;
+    width:100%;
+    max-width:100%;
+    height:100%;
+    object-fit: cover;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* --------------------------- */
+/* -----UTILITY CLASSES------- */
+/* --------------------------- */
+
+.flex {
+    display:flex;
+    gap: var(--gap, 1rem);
+}
+
+.column {
+    flex-direction: column;
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.grid {
+    display: grid;
+    gap: var(--gap, 1rem);
+}
+
+.container {
+    padding-inline: 4rem;
+    padding-block: 2rem;
+}
+
+.pd {
+    padding: var(--padding)
+}
+
+/* --------------------------- */
+/* ----------HEADER----------- */
+/* --------------------------- */
+
+.logo {
+    width:268px;
+}
+
+/* nav */
+.primary-nav {
+    margin-block:1rem;
+}
+/* main search bar */
+
+.primary-search-form {
+    position:relative;
+}
+
+.primary-search-form input {
+    width:100%;
+    border:none;
+    border-radius: var(--bd-radius);
+    background-color: var(--clr-bg);
+}
+
+.primary-search-form input::placeholder {
+    color:black;
+    opacity: 0.25;
+}
+
+.primary-search-form button {
+    position:absolute;
+    right:0;
+    padding:20px;
+    border:none;
+    background-color: transparent ;
+}
+
+/* tags */
+
+
+
+/* filters */
+.ingredients {
+    background-color: var(--clr-primary-1);
+}
+
+.appareils {
+    background-color: var(--clr-primary-2);
+}
+
+.ustensiles {
+    background-color: var(--clr-primary-3);
+}
+
+.ingredients > * {
+    background-color: var(--clr-primary-1);
+}
+
+.appareils > * {
+    background-color: var(--clr-primary-2);
+}
+
+.ustensiles > * {
+    background-color: var(--clr-primary-3);
+}
+
+.filter-dropdown {
+    position: relative;
+    border-radius:var(--bd-radius);
+    color:white;
+}
+
+.filter-dropdown:hover .filter-content{
+    display:block
+}
+
+.filter-dropdown:hover .filter-name{
+    visibility: hidden;
+}
+
+.filter-dropdown:hover input {
+    position:absolute;
+    top:-57px;
+}
+
+.filter-head {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-content {
+    display:none;
+    position:absolute;
+    min-height: fit-content;
+    padding:20px;
+}
+
+.filter-content input {
+    background-color: transparent;
+    border:none;
+    padding-block:20px;
+}
+
+.filter-content input::placeholder {
+    color:white;
+    opacity: 0.5;
+}
+
+/* --------------------------- */
+/* ----------HEADER----------- */
+/* --------------------------- */
+
+.main-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap:2rem;
+}
+
+.card {
+    height:364px;
+    background-color: var(--clr-bg);
+    overflow: hidden;
+    border-radius: var(--bd-radius);
+}
+
+.card-img-container {
+    height:50%;
+    background-color: #C7BEBE;
+}
+
+.card-heading {
+    justify-content: space-between;
+}
+
+.card-content > * {
+    width: calc(100% - 40px);
+}
+
+.card-list {
+    list-style: none;
+}
+
+.card-description > p {
+    text-overflow: ellipsis;
+}
