@@ -4,12 +4,9 @@ class App {
     }
 
     main() {
-        recipes
-            .map(recipe => new Recipe(recipe))
-            .forEach(recipe => {
-                const Template = new RecipeCard(recipe)
-                Template.createRecipeCard()
-            })
+        const mainFilter = new Filter()
+        mainFilter.applyFilter()
+        mainFilter.updateTags()
     }
 }
 
