@@ -50,21 +50,21 @@ class Filter {
             // display ingredients tag in dropdown list
             this.Ing.forEach(ing => {
                 const item = `
-                <li>${ing}</li>
+                <li class="tag-item">${ing}</li>
                 `
                 this.$filtersList[0].innerHTML += item
             })
             // display appliances tag in dropdown list
             this.App.forEach(app => {
                 const item = `
-                <li>${app}</li>
+                <li class="tag-item">${app}</li>
                 `
                 this.$filtersList[1].innerHTML += item
             })
             // display ustensils tag in dropdown list
             this.Ust.forEach(ust => {
                 const item = `
-                <li>${ust}</li>
+                <li class="tag-item">${ust}</li>
                 `
                 this.$filtersList[2].innerHTML += item
             })

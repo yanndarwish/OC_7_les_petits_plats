@@ -190,10 +190,11 @@ li {
 }
 
 .filter-dropdown:hover .filter-content{
-    display:block
+    display:block;
+    
 }
 
-.filter-dropdown:hover .fa-chevron-down {
+.filter-dropdown:hover .arrow-icon {
     transform: rotate(180deg);
 }
 
@@ -214,16 +215,29 @@ li {
     color:white;
 }
 
-.fa-chevron-down {
+.arrow-icon {
     transition: 0.2s;
 }
 
 .filter-content {
     display:none;
     position:absolute;
-    min-height: fit-content;
+    left:0;
+    max-height:300px;
+    width:700px;
+    padding:20px;
+    overflow: scroll;
 }
 
+.filters-list {
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.tag-item {
+    font-size:18px;
+    line-height: 30px;
+}
 
 
 /* --------------------------- */
