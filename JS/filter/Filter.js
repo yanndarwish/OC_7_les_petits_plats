@@ -28,6 +28,8 @@ class Filter {
                         this.Tags.push(ustensil.toLowerCase())
                         this.Ust.push(ustensil.toLowerCase())
                     })
+                    // push recipe in this.Recipes array
+                    this.Recipes.push(recipe)
                     const Template = new RecipeCard(recipe)
                     Template.createRecipeCard()
                 })
