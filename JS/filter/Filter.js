@@ -1,6 +1,7 @@
 class Filter {
     constructor() {
         this.Input = ""
+        this.OriginalNode = ""
         this.Recipes = []
         this.Tags = []
         this.Ing = []
@@ -106,6 +107,10 @@ class Filter {
         this.removeDoubleTags()
     }
 
+    displayOriginalNode() {
+        this.$container.innerHTML =  this.OriginalNode
+    }
+
     removeDoubleTags() {
         this.Tags = [...new Set(this.Tags)]
         this.Ing = [...new Set(this.Ing)]
@@ -148,5 +153,10 @@ class Filter {
 
     clearContainer() {
         this.$container.innerHTML = ""
+    }
+
+    saveOriginalNode(Node) {
+        // save all the recipes html nodes as strings to make loading quicker
+        this.OriginalNode += Node.innerHTML
     }
 }
