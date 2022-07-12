@@ -6,7 +6,7 @@ class App {
     main() {
         const mainFilter = new Filter()
         mainFilter.initRecipes(recipes)
-        mainFilter.applyFilter(recipes)
+        mainFilter.applyFilter()
 
         mainFilter.saveOriginalNode(document.querySelector('.main-container'))
         
@@ -16,9 +16,8 @@ class App {
             if (Input.length > 2  ) {
                 mainFilter.applyFilter(recipes, Input.toLowerCase())
                 // if input empty display all the recipes
-            } else if (Input.length === 0) {
-                mainFilter.displayOriginalNode()
-                mainFilter.initRecipes(recipes)
+            } else if (Input.length <= 2) {
+                mainFilter.handleEmptyInput()
             }
         })
     }

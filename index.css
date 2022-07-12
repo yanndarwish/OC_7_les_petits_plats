@@ -150,19 +150,26 @@ li {
 }
 
 /* tags */
-
+.selected-tag {
+    padding:10px;
+    border-radius: var(--bd-radius);
+    color:white;
+}
 
 
 /* filters */
-.ingredients {
+.ingredients,
+.selected-tag.ing {
     background-color: var(--clr-primary-1);
 }
 
-.appareils {
+.appareils,
+.selected-tag.app {
     background-color: var(--clr-primary-2);
 }
 
-.ustensiles {
+.ustensiles,
+.selected-tag.ust {
     background-color: var(--clr-primary-3);
 }
 
