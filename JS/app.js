@@ -5,17 +5,20 @@ class App {
 
     main() {
         const mainFilter = new Filter()
-        mainFilter.applyFilter()
-        mainFilter.updateTags()
+        mainFilter.initRecipes(recipes)
+        mainFilter.applyFilter(recipes)
+
         mainFilter.saveOriginalNode(document.querySelector('.main-container'))
         
         this.$search.addEventListener('keyup', e => {
             let Input = e.target.value
-            if (Input.length > 2) {
-                mainFilter.applyFilter(Input.toLowerCase())
+
+            if (Input.length > 2  ) {
+                mainFilter.applyFilter(recipes, Input.toLowerCase())
                 // if input empty display all the recipes
             } else if (Input.length === 0) {
                 mainFilter.displayOriginalNode()
+                mainFilter.resetRecipes()
             }
         })
     }

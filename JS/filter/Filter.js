@@ -12,40 +12,47 @@ class Filter {
         this.$container = document.querySelector('.main-container')
     }
 
-    applyFilter(Input, Tags) {
+    initRecipes(Recipes) {
+        // exctract data from recipes
+        Recipes
+            // .map(recipe => new Recipe(recipe))
+            .forEach(recipe => {
+                // get ingredients
+                recipe.ingredients.forEach(ingredient => {
+                    this.Tags.push(ingredient.ingredient.toLowerCase())
+                    this.Ing.push(ingredient.ingredient.toLowerCase())
+                })
+                // get appliances
+                this.Tags.push(recipe.appliance.toLowerCase())
+                this.App.push(recipe.appliance.toLowerCase())
+                // get ustensils
+                recipe.ustensils.forEach(ustensil => {
+                    this.Tags.push(ustensil.toLowerCase())
+                    this.Ust.push(ustensil.toLowerCase())
+                })
+                // push in this.Recipes
+                this.Recipes.push(recipe)
+            }) 
+    }
+
+    applyFilter(Recipes, Input, Tags) {
         this.$container.innerHTML = ""
         // if no arguments, display all the recipes
         if (!Input && !Tags) {
-            recipes
-                .map(recipe => new Recipe(recipe))
+            Recipes
                 .forEach(recipe => {
-                    // get ingredients
-                    recipe.ingredients.forEach(ingredient => {
-                        this.Tags.push(ingredient.ingredient.toLowerCase())
-                        this.Ing.push(ingredient.ingredient.toLowerCase())
-                    })
-                    // get appliances
-                    this.Tags.push(recipe.appliance.toLowerCase())
-                    this.App.push(recipe.appliance.toLowerCase())
-                    // get ustensils
-                    recipe.ustensils.forEach(ustensil => {
-                        this.Tags.push(ustensil.toLowerCase())
-                        this.Ust.push(ustensil.toLowerCase())
-                    })
-                    // push recipe in this.Recipes array
-                    this.Recipes.push(recipe)
                     // create cards and render
                     const Template = new RecipeCard(recipe)
                     Template.createRecipeCard()
                 })
-            this.updateTags()
-            // if Input form search bar 
+
+        // if Input from search bar 
         } else if (Input) {
             this.clearContainer()
 
             let regExp = new RegExp(Input)
             let filteredRecipes = []
-            // define function to check if the recipe is already in filteredRecipes
+            // function to check if the recipe is already in filteredRecipes
             // and prevent doubles
             function containsObject(obj, list) {
                 for (let i = 0; i < list.length; i++) {
@@ -56,7 +63,7 @@ class Filter {
                 return false
             }
             // exctract keywords from each recipe and look for matches
-            this.Recipes.forEach(recipe => {
+            Recipes.forEach(recipe => {
                 let Keywords = []
                 // push ingredients in Keywords array
                 recipe.ingredients.forEach(ingredient => {
@@ -83,12 +90,14 @@ class Filter {
 
             // update this.Recipes
             this.Recipes = filteredRecipes
+
             // reset Tags
             this.Tags = []
             this.Ing = []
             this.App = []
             this.Ust = []
 
+            // update Tags and create cards for each recipe
             this.Recipes
                 .map(recipe => new Recipe(recipe))
                 .forEach(recipe => {
@@ -109,10 +118,9 @@ class Filter {
                     const Template = new RecipeCard(recipe)
                     Template.createRecipeCard()
                 })
-            this.updateTags()
-        }
-
+            }
         this.removeDoubleTags()
+        this.updateTags()
     }
 
     displayOriginalNode() {
@@ -166,5 +174,14 @@ class Filter {
     saveOriginalNode(Node) {
         // save all the recipes html nodes as strings to make loading quicker
         this.OriginalNode += Node.innerHTML
+    }
+
+    resetRecipes() {
+        this.Recipes = []
+        recipes
+            .map(recipe => new Recipe(recipe))
+            .forEach(recipe => {
+                this.Recipes.push(recipe)
+            }) 
     }
 }
