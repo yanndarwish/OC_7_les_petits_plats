@@ -41,12 +41,12 @@ class Filter {
             this.updateTags()
             // if Input form search bar 
         } else if (Input) {
-            console.log(Input)
             this.clearContainer()
 
             let regExp = new RegExp(Input)
             let filteredRecipes = []
-
+            // define function to check if the recipe is already in filteredRecipes
+            // and prevent doubles
             function containsObject(obj, list) {
                 for (let i = 0; i < list.length; i++) {
                     if (list[i] === obj) {
@@ -55,7 +55,7 @@ class Filter {
                 }
                 return false
             }
-
+            // exctract keywords from each recipe and look for matches
             this.Recipes.forEach(recipe => {
                 let Keywords = []
                 // push ingredients in Keywords array
@@ -68,6 +68,7 @@ class Filter {
                 recipe.ustensils.forEach(ustensil => {
                     Keywords.push(ustensil.toLowerCase())
                 })
+                // look for matches
                 Keywords.forEach(word => {
                     // if match found
                     if (word.match(regExp)) {
@@ -82,26 +83,33 @@ class Filter {
 
             // update this.Recipes
             this.Recipes = filteredRecipes
+            // reset Tags
+            this.Tags = []
+            this.Ing = []
+            this.App = []
+            this.Ust = []
+
             this.Recipes
-                        .map(recipe => new Recipe(recipe))
-                        .forEach(recipe => {
-                            // get ingredients
-                            // recipe.ingredients.forEach(ingredient => {
-                            //     this.Tags.push(ingredient.ingredient.toLowerCase())
-                            //     this.Ing.push(ingredient.ingredient.toLowerCase())
-                            // })
-                            // // get appliances
-                            // this.Tags.push(recipe.appliance.toLowerCase())
-                            // this.App.push(recipe.appliance.toLowerCase())
-                            // // get ustensils
-                            // recipe.ustensils.forEach(ustensil => {
-                            //     this.Tags.push(ustensil.toLowerCase())
-                            //     this.Ust.push(ustensil.toLowerCase())
-                            // })
-                            // push recipe in this.Recipes array
-                            const Template = new RecipeCard(recipe)
-                            Template.createRecipeCard()
-                        })
+                .map(recipe => new Recipe(recipe))
+                .forEach(recipe => {
+                    // get ingredients
+                    recipe.ingredients.forEach(ingredient => {
+                        this.Tags.push(ingredient.ingredient.toLowerCase())
+                        this.Ing.push(ingredient.ingredient.toLowerCase())
+                    })
+                    // get appliances
+                    this.Tags.push(recipe.appliance.toLowerCase())
+                    this.App.push(recipe.appliance.toLowerCase())
+                    // get ustensils
+                    recipe.ustensils.forEach(ustensil => {
+                        this.Tags.push(ustensil.toLowerCase())
+                        this.Ust.push(ustensil.toLowerCase())
+                    })
+                    // push recipe in this.Recipes array
+                    const Template = new RecipeCard(recipe)
+                    Template.createRecipeCard()
+                })
+            this.updateTags()
         }
 
         this.removeDoubleTags()
