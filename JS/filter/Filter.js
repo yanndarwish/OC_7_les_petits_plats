@@ -13,6 +13,7 @@ class Filter {
     }
 
     initRecipes(Recipes) {
+        this.Recipes = []
         // exctract data from recipes
         Recipes
             // .map(recipe => new Recipe(recipe))
@@ -33,6 +34,9 @@ class Filter {
                 // push in this.Recipes
                 this.Recipes.push(recipe)
             }) 
+
+            this.removeDoubleTags()
+            this.updateTags()
     }
 
     applyFilter(Recipes, Input, Tags) {
@@ -118,9 +122,9 @@ class Filter {
                     const Template = new RecipeCard(recipe)
                     Template.createRecipeCard()
                 })
+                this.removeDoubleTags()
+                this.updateTags()
             }
-        this.removeDoubleTags()
-        this.updateTags()
     }
 
     displayOriginalNode() {
@@ -174,14 +178,5 @@ class Filter {
     saveOriginalNode(Node) {
         // save all the recipes html nodes as strings to make loading quicker
         this.OriginalNode += Node.innerHTML
-    }
-
-    resetRecipes() {
-        this.Recipes = []
-        recipes
-            .map(recipe => new Recipe(recipe))
-            .forEach(recipe => {
-                this.Recipes.push(recipe)
-            }) 
     }
 }
