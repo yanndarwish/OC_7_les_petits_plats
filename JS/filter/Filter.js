@@ -64,6 +64,8 @@ class Filter {
             }
             if (typeof Input !== 'string') {
                 Input = Input[Input.length - 1]
+            } else {
+                this.Input = Input
             }
 
             let regExp = new RegExp(Input)
