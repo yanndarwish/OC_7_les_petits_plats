@@ -41,21 +41,27 @@ class Filter {
                 this.OriginalRecipes.push(recipe)
             }) 
             this.removeDoubleTags()
-            this.updateTagsDOM()
+            this.updateTags()
     }
 
     applyFilter(Recipes, Input, Action) {
         this.$container.innerHTML = ""
         // if no arguments, display all the recipes
         if (!Input) {
-            this.displayFilteredRecipes(this.Recipes)
+            this.Recipes
+                .forEach(recipe => {
+                    // create cards and render
+                    const Template = new RecipeCard(recipe)
+                    Template.createRecipeCard()
+                })
+
         // if Input from search bar 
         } else {
             this.clearContainer()
             // if Input is a tag, get the last one
-            // if (this.hasTags && Action !== 'DEC') {
-            //     Recipes = this.Recipes
-            // }
+            if (this.hasTags && Action !== 'DEC') {
+                Recipes = this.Recipes
+            }
             if (typeof Input !== 'string') {
                 Input = Input[Input.length - 1]
             } else {
@@ -64,7 +70,16 @@ class Filter {
 
             let regExp = new RegExp(Input)
             let filteredRecipes = []
-            
+            // function to check if the recipe is already in filteredRecipes
+            // and prevent doubles
+            function containsObject(obj, list) {
+                for (let i = 0; i < list.length; i++) {
+                    if (list[i] === obj) {
+                        return true
+                    }
+                }
+                return false
+            }
             // exctract keywords from each recipe and look for matches
             Recipes.forEach(recipe => {
                 let Keywords = []
@@ -83,7 +98,7 @@ class Filter {
                     // if match found
                     if (word.match(regExp)) {
                         // if recipe is not already in the array, push it !
-                        if (!this.containsObject(recipe, filteredRecipes)) {
+                        if (!containsObject(recipe, filteredRecipes)) {
                             filteredRecipes.push(recipe)
                         }
                         
@@ -128,106 +143,8 @@ class Filter {
                     Template.createRecipeCard()
                 })
                 this.removeDoubleTags()
-                this.updateTagsDOM()
+                this.updateTags()
         }
-    }
-
-    filterByTags(Recipes, Tags) {
-        this.clearContainer()
-
-        let Input = Tags[Tags.length - 1]
-
-        let regExp = new RegExp(Input)
-        let filteredRecipes = []
-
-        Recipes.forEach(recipe => {
-            let Keywords = []
-                // push ingredients in Keywords array
-                recipe.ingredients.forEach(ingredient => {
-                    Keywords.push(ingredient.ingredient.toLowerCase())
-                })
-                // push appliances in Keywords array
-                Keywords.push(recipe.appliance.toLowerCase())
-                // push ustensils in Keywords array
-                recipe.ustensils.forEach(ustensil => {
-                    Keywords.push(ustensil.toLowerCase())
-                })
-                // look for matches
-                Keywords.forEach(word => {
-                    // if match found
-                    if (word.match(regExp)) {
-                        // if recipe is not already in the array, push it !
-                        if (!this.containsObject(recipe, filteredRecipes)) {
-                            filteredRecipes.push(recipe)
-                        }
-                        
-                    }
-                })
-        })
-        console.log(filteredRecipes)
-        // update this.Recipes
-        this.Recipes = filteredRecipes
-
-        // reset Tags
-        this.Tags = []
-        this.Ing = []
-        this.App = []
-        this.Ust = []
-
-        this.updateTagsArrays(this.Recipes, Input)
-    }
-
-    updateTagsArrays(Recipes, Input) {
-        // update Tags and create cards for each recipe
-        console.log(Recipes)
-        Recipes
-        // .map(recipe => new Recipe(recipe))
-        .forEach(recipe => {
-            // get ingredients
-            recipe.ingredients.forEach(ingredient => {
-                // this.Tags.push(ingredient.ingredient.toLowerCase())
-                if (ingredient.ingredient.toLowerCase() !== Input) {
-                    this.Ing.push(ingredient.ingredient.toLowerCase())
-                }
-            })
-            // get appliances
-            // this.Tags.push(recipe.appliance.toLowerCase())
-            if (recipe.appliance.toLowerCase() !== Input) {
-                this.App.push(recipe.appliance.toLowerCase())
-            }
-            // get ustensils
-            recipe.ustensils.forEach(ustensil => {
-                // this.Tags.push(ustensil.toLowerCase())
-                if (ustensil.toLowerCase() !== Input) {
-                    this.Ust.push(ustensil.toLowerCase())
-                }
-            })
-            
-        })
-        this.displayFilteredRecipes(this.Recipes)
-        this.removeDoubleTags()
-        this.updateTagsDOM()
-    }
-
-    // function to check if the recipe is already in filteredRecipes
-    // and prevent doubles
-    containsObject(obj, list) {
-        for (let i = 0; i < list.length; i++) {
-            if (list[i] === obj) {
-                return true
-            }
-        }
-        return false
-    }
-
-    displayFilteredRecipes(Recipes) {
-        console.log(Recipes)
-        Recipes
-            .forEach(recipe => {
-                // create cards and render
-                const Template = new RecipeCard(recipe)
-                Template.createRecipeCard()
-            })
     }
 
     displayOriginalNode() {
@@ -241,7 +158,7 @@ class Filter {
         this.Tags = this.Ing.concat(this.App, this.Ust)
     }
 
-    updateTagsDOM(Tags) {
+    updateTags(Tags) {
         this.clearTags()
         if (!Tags) {
             // display ingredients tag in dropdown list
@@ -291,8 +208,7 @@ class Filter {
                         tagNode.classList.add('tag-item')
                         this.$filtersList[2].appendChild(tagNode)
                     }
-                    // this.applyFilter(this.OriginalRecipes, this.selectedTags, 'DEC')
-                    this.filterByTags(this.OriginalRecipes, this.selectedTags)
+                    this.applyFilter(this.OriginalRecipes, this.selectedTags, 'DEC')
                 } else {
                     let selectedTags = document.querySelectorAll('.selected-tag')
                     this.selectedTags.push(tagNode.innerHTML)
@@ -310,8 +226,7 @@ class Filter {
                     document.querySelector('.selected-tag-list').appendChild(e.target)
                     this.hasTags = true
                     // apply filter with selected tag
-                    // this.applyFilter(this.Recipes, this.selectedTags)
-                    this.filterByTags(this.Recipes, this.selectedTags)
+                    this.applyFilter(this.Recipes, this.selectedTags)
                 }
             })
         })
@@ -336,7 +251,7 @@ class Filter {
         // check if this.hastags === true 
         // if true, keep filtered array
         if (this.hasTags) {
-            this.filterByTags(this.OriginalRecipes, this.selectedTags)
+            this.applyFilter(this.OriginalRecipes, this.selectedTags, 'DEC')
         } else {
             this.initRecipes(this.OriginalRecipes)
             this.displayOriginalNode()
