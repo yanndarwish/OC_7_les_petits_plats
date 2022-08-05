@@ -1,23 +1,22 @@
 class App {
     constructor(){
-        this.$search = document.querySelector('#searchbar')
+        this.PatternSearch   = new PatternSearch()
+        this.Tags            = new Tags()
+        this.Filter          = new Filter(this.PatternSearch, this.Tags)
+        this.OriginalRecipes = recipes
+
+        this.stringInput     = document.querySelector('#searchbar')
     }
 
     main() {
-        const mainFilter = new Filter()
-        mainFilter.initRecipes(recipes)
-        mainFilter.applyFilter()
+        this.Tags.format(this.OriginalRecipes)
+        this.Filter.displayRecipes(this.OriginalRecipes)
 
-        mainFilter.saveOriginalNode(document.querySelector('.main-container'))
-        
-        this.$search.addEventListener('keyup', e => {
-            let Input = e.target.value
-
-            if (Input.length > 2  ) {
-                mainFilter.applyFilter(recipes, Input.toLowerCase())
-                // if input empty display all the recipes
-            } else if (Input.length === 0) {
-                mainFilter.handleEmptyInput()
+        this.stringInput.addEventListener('keyup', () => {
+            if (this.stringInput.value.length > 2) {
+                this.Filter.filter(this.OriginalRecipes, this.stringInput.value)
+            } else if (this.stringInput.value.length === 0) {
+                this.Filter.displayRecipes(this.OriginalRecipes)
             }
         })
     }

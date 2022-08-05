@@ -10,6 +10,7 @@ class Filter {
         this.Ust = []
         this.selectedTags = []
         this.hasTags = false
+        this.TagObject = new Tags()
 
         this.$selectedTagsContainer = document.querySelector('.selected-tags-container')
         this.$tagItems
@@ -54,6 +55,8 @@ class Filter {
 
         // if Input 
         } else {
+            this.TagObject.updateTagsArrays(this.Recipes, Input)
+
             this.clearContainer()
             // apply on this.recipes only when has Tags and no action
             if (this.hasTags && Action !== 'DEC') {
@@ -63,10 +66,12 @@ class Filter {
                 Input = Input[Input.length - 1]
             } else {
                 this.Input = Input
+                this.patternSearch(this.Input)
             }
             // if no tags and no input ( when you remove the last tag for example )
             // reset and display original Node with handleEmptyInput function
             if (this.hasTags === false && this.Input === ""){
+                console.log('now')
                 this.handleEmptyInput()
             // else launch filter process
             } else {
@@ -96,11 +101,15 @@ class Filter {
             }
         }    
     }
+
+    patternSearch() {
+
+    }
     // search algorithm
     search(txt, pat) {
         let M = pat.length;
         let N = txt.length;
-        /* A loop to slide pat one by one */
+        /* A loop to slide pattern one by one */
         for (let i = 0; i <= N - M; i++) {
             let j;
             /* For current index i, check for pattern match */
@@ -143,11 +152,14 @@ class Filter {
     }
 
     displayFilteredRecipes(Recipes) {
-        Recipes
-            .forEach(recipe => {
+        if (Recipes.length === 0) {
+            this.$container.innerHTML = "Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc."
+        } else {
+            Recipes.forEach(recipe => {
                 const Template = new RecipeCard(recipe)
                 Template.createRecipeCard()
             })
+        }
     }
 
     displayOriginalNode() {
