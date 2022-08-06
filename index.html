@@ -31,7 +31,7 @@
                         <div class="filter-dropdown ingredients">
                             <div class="filter-head flex">
                                 <label id="ingredients-searchbar-label" for="ingredients-searchbar" class="sr-only">Search for ingredients</label>
-                                <input type="text" id="ingredients-searchbar" aria-labelledby="ingredients-searchbar-label" placeholder="Ingrédient">
+                                <input type="text" id="ingredients-searchbar" class="tag-searchbar" data-category="ing" aria-labelledby="ingredients-searchbar-label" placeholder="Ingrédient">
                                 <img src="./assets/icons/chevron-down-solid.svg" class="arrow-icon">
                             </div>
                             <div class="filter-content">
@@ -44,7 +44,7 @@
                         <div class="filter-dropdown appareils">
                             <div class="filter-head flex">
                                 <label id="appareils-searchbar-label" for="appareils-searchbar" class="sr-only">Search for appareils</label>
-                                <input type="text" id="appareils-searchbar" aria-labelledby="appareils-searchbar-label" placeholder="Appareils">
+                                <input type="text" id="appareils-searchbar" class="tag-searchbar" data-category="app" aria-labelledby="appareils-searchbar-label" placeholder="Appareils">
                                 <img src="./assets/icons/chevron-down-solid.svg" class="arrow-icon">
                             </div>
                             <div class="filter-content">
@@ -57,7 +57,7 @@
                         <div class="filter-dropdown ustensiles">
                             <div class="filter-head flex">
                                 <label id="ustensiles-searchbar-label" for="ustensiles-searchbar" class="sr-only">Search for ustensils</label>
-                                <input type="text" id="ustensiles-searchbar" aria-labelledby="ustensiles-searchbar-label" placeholder="Ustensiles">
+                                <input type="text" id="ustensiles-searchbar" class="tag-searchbar" data-category="ust" aria-labelledby="ustensiles-searchbar-label" placeholder="Ustensiles">
                                 <img src="./assets/icons/chevron-down-solid.svg" class="arrow-icon">
                             </div>
                             <div class="filter-content">
@@ -83,8 +83,9 @@
         <!-- filter -->
         <script src="./JS/filter/Filter.js"></script>
         
-        <script src="./JS/filter/Tags.js"></script>
         <script src="./JS/filter/PatternSeach.js"></script>
+        <script src="./JS/filter/Tags.js"></script>
+        <script src="./JS/filter/TagsDOM.js"></script>
 
 
         

@@ -150,11 +150,17 @@ li {
 }
 
 /* tags */
+
+.selected-tags-container {
+    flex-wrap: wrap;
+}
+
 .selected-tag {
     padding:10px;
     border-radius: var(--bd-radius);
     color:white;
 }
+
 
 
 /* filters */

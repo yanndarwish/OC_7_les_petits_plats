@@ -7,27 +7,45 @@
 class  Filter {
     constructor(PatternSearch, Tags) {
         this.PatternSearch = PatternSearch
-        this.Tags          = Tags
+        this.Tags          = Tags 
         this.Recipes       =  []
+        this.OriginalRecipes = []
 
         this.$container    = document.querySelector('.main-container')
     }
 
-    filter(Recipes, input) {
+    init(Recipes) {
+        this.Recipes = Recipes
+        this.OriginalRecipes = Recipes
+        // this.PatternSearch = new PatternSearch()
+        // this.Tags = new Tags(this.Recipes)
+        this.Tags.format(this.Recipes)
+    }
+
+    filter(Recipes, input, TagsInstance, option) {
         // value is a string, send to patternSearch
         if (typeof input === 'string') {
+            console.log(this.Recipes)
             this.Recipes = this.PatternSearch.format(Recipes, input)
-            // should return an array of filtered recipes
+            console.log(this.Recipes)
+
             this.displayRecipes(this.Recipes)
-        } else if (typeof input === 'array'){
-            // value is a tag (array), send to TagSearch
-            console.log('now working with tag')
+
+        } else if (typeof input === 'object'){
+                // this.Tags = new Tags(Recipes)
+                // option === 'back' 
+                //     ? TagsInstance.filterByTags(this.OriginalRecipes, input)
+                //     : TagsInstance.filterByTags(this.Recipes, input)
+                this.displayRecipes(TagsInstance.format(this.Recipes, input, TagsInstance), TagsInstance)
         } else {
             throw 'invalid type of input';
         }
     } 
 
-    displayRecipes(Recipes) {
+    displayRecipes(Recipes, TagsInstance) {
+        console.log(Recipes)
+        this.Recipes = Recipes
+
         this.$container.innerHTML = ""
 
         if (Recipes.length === 0) {
@@ -37,6 +55,13 @@ class  Filter {
                 const Template = new RecipeCard(recipe)
                 Template.createRecipeCard()
             })
+        }
+        // update tags
+        if (TagsInstance) {
+            // console.log('instance')
+            TagsInstance.format(Recipes, [], TagsInstance) 
+        } else {
+            this.Tags.format(Recipes)
         }
     }
 }

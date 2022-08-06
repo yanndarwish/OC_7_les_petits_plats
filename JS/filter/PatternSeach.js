@@ -1,7 +1,6 @@
 // todo search from input pattern
 class PatternSearch {
     constructor() {
-
     }
 
     format(Recipes, value) {
@@ -43,7 +42,6 @@ class PatternSearch {
             }
         }
     }
-
 } 
 
 // ! NOMINAL CASE
