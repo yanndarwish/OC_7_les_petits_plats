@@ -5,6 +5,7 @@ class PatternSearch {
 
     format(Recipes, value) {
         // stringify the data to ease pattern search
+        console.log(Recipes)
         let FilteredRecipes = []
         Recipes.forEach(recipe => {
             let string = ''
