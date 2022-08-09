@@ -26,17 +26,15 @@ class PatternSearch {
     }
 
     static search(string, value) {
-        let M = value.length;
-        let N = string.length;
-        /* A loop to slide pattern one by one */
-        for (let i = 0; i <= N - M; i++) {
+        // A loop to slide pattern one by one 
+        // substract lengths to provide big enough window to compare the two
+        for (let i = 0; i <= string.length - value.length; i++) {
             let j;
-            /* For current index i, check for pattern match */
-            for (j = 0; j < M; j++)
+            // For current index i, check for pattern match
+            for (j = 0; j < value.length; j++)
                 if (string[i + j] != value[j])
                     break;
-            // if pat[0...M-1] = txt[i, i+1, ...i+M-1]
-            if (j == M) {
+            if (j == value.length) {
                 return true
             }
         }
