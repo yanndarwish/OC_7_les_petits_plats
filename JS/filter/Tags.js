@@ -1,6 +1,5 @@
-class Tags extends Filter{
+class Tags {
     constructor(Recipes) {
-        super()
         this.originalRecipes = Recipes
         this.Recipes = Recipes
         this.Ing                    = []
@@ -18,7 +17,7 @@ class Tags extends Filter{
         this.$tagSearchbars         = document.querySelectorAll('.tag-searchbar')
 
     }
-
+    // format Tags
     format(Recipes, Tags) {
         this.Recipes = Recipes
         this.Ing = []
@@ -58,7 +57,7 @@ class Tags extends Filter{
         this.render()
         return this.filterByTags(Recipes, Tags)
     }
-
+    // filter Recipes by tags and return filtered array
     filterByTags(Recipes, Tags) {
         // find matches in recipes based on tags 
         let filteredRecipes = []
@@ -88,7 +87,7 @@ class Tags extends Filter{
         this.Recipes = filteredRecipes
         return filteredRecipes
     }
-
+    // render tag lists
     render() {
         this.$filtersLists.forEach(list => {
             list.innerHTML = ""
@@ -107,7 +106,7 @@ class Tags extends Filter{
             this.$filtersLists[2].innerHTML += nodeString
         });
     }
-
+    // filter tagLists on internal search 
     filterTagList(category, value) {
         switch (category) {
             case 'ing':
@@ -124,13 +123,13 @@ class Tags extends Filter{
                     console.log(this.selectedTags)
         this.render()
     }
-
+    // add selected Tag
     addSelectedTag(e) {
         this.$selectedTagsContainer.appendChild(e.target)
         this.selectedTags.push(e.target.innerHTML)
         return this.selectedTags
     }
-
+    // remove from selectedTags
     removeFromSelectedTags(e) {
         if (e.target.classList.contains('ing')) {
             this.$filtersLists[0].appendChild(e.target)
@@ -139,16 +138,8 @@ class Tags extends Filter{
         } else if (e.target.classList.contains('ust')) {
             this.$filtersLists[2].appendChild(e.target)
         }
-
         this.selectedTags = this.selectedTags.filter(elt => elt !== e.target.innerHTML)
 
-        if (this.$stringInput.value.length > 2) {
-            this.Recipes = this.PatternSearch.format(this.hasTags ? this.Recipes : recipes, this.$stringInput.value)
-        }
-
-        if (this.selectedTags.length === 0) {
-            this.hasTags = false
-        }
         return this.selectedTags
     }
 }

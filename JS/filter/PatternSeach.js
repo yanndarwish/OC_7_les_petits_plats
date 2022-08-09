@@ -3,9 +3,8 @@ class PatternSearch {
     constructor() {
     }
 
-    format(Recipes, value) {
+    static format(Recipes, value) {
         // stringify the data to ease pattern search
-        console.log(Recipes)
         let FilteredRecipes = []
         Recipes.forEach(recipe => {
             let string = ''
@@ -19,15 +18,17 @@ class PatternSearch {
             string += recipe.description.toLowerCase()
             // compare the value with the new string to check for matches
             // if match, push in filteredRecipes
-            if (this.search(string, value)) {
+            if (PatternSearch.search(string, value)) {
                 FilteredRecipes.push(recipe)
             }
         })
+        console.log(FilteredRecipes)
+
         // return the filtered array
         return FilteredRecipes
     }
 
-    search(string, value) {
+    static search(string, value) {
         let M = value.length;
         let N = string.length;
         /* A loop to slide pattern one by one */
@@ -52,21 +53,21 @@ class PatternSearch {
 
 // * DOM is updated with search results DONE
 
-// * Tags are updated based on search results  
+// * Tags are updated based on search results  DONE
 
 // ! ALTERNATIVE CASE 1
 // * No macth : Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.  DONE
 
 // ! ALTERNATIVE CASE 2
-// * Search begins with Tag 
+// * Search begins with Tag DONE
 
-// * DOM is updated with search results  
+// * DOM is updated with search results  DONE
 
-// * Tags are updated based on search results  
+// * Tags are updated based on search results   DONE
 
 // ! ALTERNATIVE CASE 3
-// * User adds tags  
+// * User adds tags  DONE
 
-// * DOM is updated with search results  
+// * DOM is updated with search results  DONE
 
-// * Tags are updated based on search results 
+// * Tags are updated based on search results  DONE

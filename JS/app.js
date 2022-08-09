@@ -11,30 +11,36 @@ class App {
         this.Ing = []
         this.App = []
         this.Ust = []
-        // this.originalIng            = []
-        // this.originalApp            = []
-        // this.originalUst            = []
 
         this.$selectedTagsContainer = document.querySelector('.selected-tags-container')
         this.$filtersLists           = document.querySelectorAll('.filters-list')
         this.$tagSearchbars         = document.querySelectorAll('.tag-searchbar')
     }
-    // todo, try to create all instances here, and build all the logic from here
+
     main() {
+        // first render on load
         this.Tags.format(this.Recipes)
         Filter.displayRecipes(recipes)
 
         // if search from input
         this.$stringInput.addEventListener('keyup', () => {
-            this.Recipes = this.PatternSearch.format(this.hasTags ? this.Recipes : recipes, this.$stringInput.value)
             if (this.$stringInput.value.length > 2) {
+                // update this.Recipes
+                this.Recipes = PatternSearch.format(this.hasTags ? this.Recipes : recipes, this.$stringInput.value)
+                // update tags based on updated recipes
                 this.Tags.format(this.Recipes)
+                // render DOM
                 Filter.displayRecipes(this.Recipes)
                 // this.Filter.filter(recipes, this.$stringInput.value)
             } else if (this.$stringInput.value.length === 0) {
-                this.Tags.format(this.Recipes)
+                // update this.Recipes
+                this.Recipes = this.Tags.format(recipes, this.selectedTags)
+                // update tags based on updated recipes
+                this.Tags.format(this.Recipes, this.selectedTags)
+                // render DOM
                 Filter.displayRecipes(this.Recipes)
             }
+            // activate tags On click events
             addToSelectedTags()
             removeFromSelectedTags()
         })
@@ -42,62 +48,68 @@ class App {
         // tag searchbar
         this.$tagSearchbars.forEach(searchbar => {
             searchbar.addEventListener('keyup', e => {
-                console.log(this.Recipes)
                 let value = e.target.value
                 let category = e.target.getAttribute('data-category')
-                console.log(category)
-                console.log(value)
+                // filter tags based on which one is clicked
                 this.Tags.filterTagList(category, value)
+                // reactivate Tags on click event because of rerender
                 addToSelectedTags()
                 removeFromSelectedTags()
             })
         })
-        // if filter by tags
+        // add a Tag
         const addToSelectedTags = () => {
             document.querySelectorAll('.tag-item').forEach(tag => {
                 tag.addEventListener('click', e => {
                     if (!this.selectedTags.includes(e.target.innerHTML)) {
+                        // update element's class
                         e.target.classList.add('selected-tag')
                         e.target.classList.remove('tag-item')
-    
+                        // update selectedTags + status
                         this.selectedTags = this.Tags.addSelectedTag(e)
                         this.hasTags = true
+                        // update this.Recipes
                         this.Recipes = this.Tags.format(this.Recipes, this.selectedTags)
+                        // update tags based on updated recipes
                         this.Tags.format(this.Recipes, this.selectedTags)
-
-                        let value = e.target.innerHTML
-
+                        // reactivate Tags on click event because of rerender
                         addToSelectedTags()
                         removeFromSelectedTags()
+                        // render DOM
                         Filter.displayRecipes(this.Recipes)
                     }
                 })
             })
         }
-
+        // remove a tag
         const removeFromSelectedTags = () => {
             document.querySelectorAll('.selected-tag').forEach(tag => {
                 tag.addEventListener('click', e => {
                     if (document.querySelectorAll('.selected-tag').length ) {
+                        // update element's class
                         e.target.classList.remove('selected-tag')
                         e.target.classList.add('tag-item')
-
+                        // update selectedTags + status
                         this.selectedTags = this.Tags.removeFromSelectedTags(e)
-                        this.Recipes = this.Tags.format(this.originalRecipes, this.selectedTags)
-                        if (this.$stringInput.value.length > 2) {
-                            this.Recipes = this.PatternSearch.format(this.hasTags ? this.Recipes : recipes, this.$stringInput.value)
-                        }
-                
                         if (this.selectedTags.length === 0) {
                             this.hasTags = false
                         }
+                        // update this.Recipes
+                        this.Recipes = this.Tags.format(this.originalRecipes, this.selectedTags)
+                        // update tags based on updated recipes
+                        this.Tags.format(this.Recipes, this.selectedTags)
+                        // if string input, update recipes based on the pattern search result
+                        if (this.$stringInput.value.length > 2) {
+                            this.Recipes = PatternSearch.format(this.hasTags ? this.Recipes : recipes, this.$stringInput.value)
+                        }
+                        // render DOM
                         Filter.displayRecipes(this.Recipes)
                     }
                     addToSelectedTags()
-
                 })
             })
         }
+        // activate Tags on click events
         addToSelectedTags()
         removeFromSelectedTags()
     }
