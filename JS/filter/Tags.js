@@ -40,7 +40,6 @@ class Tags {
         this.Ing = [...new Set(this.Ing)]
         this.App = [...new Set(this.App)]
         this.Ust = [...new Set(this.Ust)] 
-        console.log(Tags)
         // remove selected Tag
         if (Tags) {
             Tags.forEach(tag => {
@@ -120,7 +119,6 @@ class Tags {
                         this.Ust = this.originalUst.filter(elt => !(this.selectedTags.indexOf(elt) > -1 )).filter(elt => elt.includes(value))
                         break
                     }
-                    console.log(this.selectedTags)
         this.render()
     }
     // add selected Tag

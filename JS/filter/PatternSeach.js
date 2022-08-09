@@ -1,4 +1,3 @@
-// todo search from input pattern
 class PatternSearch {
     constructor() {
     }
@@ -22,8 +21,6 @@ class PatternSearch {
                 FilteredRecipes.push(recipe)
             }
         })
-        console.log(FilteredRecipes)
-
         // return the filtered array
         return FilteredRecipes
     }
@@ -45,29 +42,3 @@ class PatternSearch {
         }
     }
 } 
-
-// ! NOMINAL CASE
-// * search begins when 3ch are types, then fuzzy finder (on change) DONE
-
-// * search in title, ingredients, description DONE
-
-// * DOM is updated with search results DONE
-
-// * Tags are updated based on search results  DONE
-
-// ! ALTERNATIVE CASE 1
-// * No macth : Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.  DONE
-
-// ! ALTERNATIVE CASE 2
-// * Search begins with Tag DONE
-
-// * DOM is updated with search results  DONE
-
-// * Tags are updated based on search results   DONE
-
-// ! ALTERNATIVE CASE 3
-// * User adds tags  DONE
-
-// * DOM is updated with search results  DONE
-
-// * Tags are updated based on search results  DONE

@@ -96,12 +96,12 @@ class App {
                         }
                         // update this.Recipes
                         this.Recipes = this.Tags.format(this.originalRecipes, this.selectedTags)
-                        // update tags based on updated recipes
-                        this.Tags.format(this.Recipes, this.selectedTags)
                         // if string input, update recipes based on the pattern search result
                         if (this.$stringInput.value.length > 2) {
                             this.Recipes = PatternSearch.format(this.hasTags ? this.Recipes : recipes, this.$stringInput.value)
                         }
+                        // update tags based on updated recipes
+                        this.Tags.format(this.Recipes, this.selectedTags)
                         // render DOM
                         Filter.displayRecipes(this.Recipes)
                     }
