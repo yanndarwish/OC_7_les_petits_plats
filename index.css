@@ -147,6 +147,7 @@ li {
 
 .search-icon {
     height:30px;
+    width:30px;
 }
 
 /* tags */
@@ -200,6 +201,7 @@ li {
 
 .arrow-icon {
     height:20px;
+    width:20px;
 }
 
 .filter-dropdown:hover .filter-content{
@@ -237,17 +239,21 @@ li {
     position:absolute;
     left:0;
     max-height:300px;
-    width:700px;
+    /* width:650px; */
+    min-width:295px;
     padding:20px;
     overflow: scroll;
 }
 
 .filters-list {
     display:grid;
+    gap:1rem;
     grid-template-columns: repeat(3, 1fr);
 }
 
 .tag-item {
+    flex: 1 1 1/4;
+    white-space: nowrap;
     font-size:18px;
     line-height: 30px;
 }
