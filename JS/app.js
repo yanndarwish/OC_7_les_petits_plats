@@ -61,7 +61,7 @@ class App {
         const addToSelectedTags = () => {
             document.querySelectorAll('.tag-item').forEach(tag => {
                 tag.addEventListener('click', e => {
-                    if (!this.selectedTags.includes(e.target.innerHTML)) {
+                    if (!this.selectedTags.includes(e.target.innerText.trim()) && e.target.nodeName === 'LI') {
                         // update element's class
                         e.target.classList.add('selected-tag')
                         e.target.classList.remove('tag-item')
@@ -73,11 +73,11 @@ class App {
                         // update tags based on updated recipes
                         this.Tags.format(this.Recipes, this.selectedTags)
                         // reactivate Tags on click event because of rerender
-                        addToSelectedTags()
-                        removeFromSelectedTags()
                         // render DOM
                         Filter.displayRecipes(this.Recipes)
                     }
+                    addToSelectedTags()
+                    removeFromSelectedTags()
                 })
             })
         }
@@ -85,12 +85,25 @@ class App {
         const removeFromSelectedTags = () => {
             document.querySelectorAll('.selected-tag').forEach(tag => {
                 tag.addEventListener('click', e => {
-                    if (document.querySelectorAll('.selected-tag').length ) {
-                        // update element's class
-                        e.target.classList.remove('selected-tag')
-                        e.target.classList.add('tag-item')
+                    if (document.querySelectorAll('.selected-tag').length) {
                         // update selectedTags + status
-                        this.selectedTags = this.Tags.removeFromSelectedTags(e)
+                        if (e.target.nodeName === 'IMG') {
+                            // update element's class
+                        e.target.parentNode.parentNode.classList.remove('selected-tag')
+                        e.target.parentNode.parentNode.classList.add('tag-item')
+                            this.selectedTags = this.Tags.removeFromSelectedTags(e.target.parentNode.parentNode)
+                        } else if (e.target.nodeName === 'DIV' ) {
+                            e.target.parentNode.classList.remove('selected-tag')
+                        e.target.parentNode.classList.add('tag-item')
+                            this.selectedTags = this.Tags.removeFromSelectedTags(e.target.parentNode)
+                        } else {
+                            if (this.selectedTags.includes(e.target.innerText.trim())) {
+                                // update element's class
+                            e.target.classList.remove('selected-tag')
+                            e.target.classList.add('tag-item')
+                                this.selectedTags = this.Tags.removeFromSelectedTags(e.target)
+                            }
+                        }
                         if (this.selectedTags.length === 0) {
                             this.hasTags = false
                         }
