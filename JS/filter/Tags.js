@@ -123,20 +123,29 @@ class Tags {
     }
     // add selected Tag
     addSelectedTag(e) {
+        console.log('adding')
+        this.selectedTags.push(e.target.innerText.trim())
+        const closeIcon = `<div class="close-icon flex center">
+            <img src="./assets/icons/times-solid.svg" class="clock-icon" alt="icon">
+            </div>
+        `
+        e.target.innerHTML += closeIcon
+        e.target.classList.add('flex')
         this.$selectedTagsContainer.appendChild(e.target)
-        this.selectedTags.push(e.target.innerHTML)
+
         return this.selectedTags
     }
     // remove from selectedTags
     removeFromSelectedTags(e) {
-        if (e.target.classList.contains('ing')) {
-            this.$filtersLists[0].appendChild(e.target)
-        } else if (e.target.classList.contains('app')) {
-            this.$filtersLists[1].appendChild(e.target)
-        } else if (e.target.classList.contains('ust')) {
-            this.$filtersLists[2].appendChild(e.target)
-        }
-        this.selectedTags = this.selectedTags.filter(elt => elt !== e.target.innerHTML)
+            e.querySelector('.close-icon').remove()
+            if (e.classList.contains('ing')) {
+                this.$filtersLists[0].appendChild(e)
+            } else if (e.classList.contains('app')) {
+                this.$filtersLists[1].appendChild(e)
+            } else if (e.classList.contains('ust')) {
+                this.$filtersLists[2].appendChild(e)
+            }
+            this.selectedTags = this.selectedTags.filter(elt => elt !== e.innerText.trim())
 
         return this.selectedTags
     }
