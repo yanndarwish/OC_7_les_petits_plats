@@ -14,7 +14,7 @@ class RecipeCard {
             <div class="card-body pd">
                 <div class="card-heading flex">
                     <h3 class="card-title">${this.Recipe.name}</h3>
-                    <div class="card-time flex"><img src="./assets/icons/clock-solid.svg" class="clock-icon"> <span class="recipe-duration">${this.Recipe.time}</span> min</div>
+                    <div class="card-time flex"><img src="./assets/icons/clock-solid.svg" class="clock-icon" alt="icon"> <span class="recipe-duration">${this.Recipe.time}</span> min</div>
                 </div>
                 <div class="card-content flex">
                         <ul class="card-list">
