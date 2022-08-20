@@ -4,6 +4,7 @@ class PatternSearch {
 
     static format(Recipes, value) {
         // stringify the data to ease pattern search
+        value = value.toLowerCase()
         let FilteredRecipes = []
         Recipes.forEach(recipe => {
             let string = ''
