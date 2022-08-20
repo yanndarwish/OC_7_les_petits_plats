@@ -88,14 +88,18 @@ class App {
                     if (document.querySelectorAll('.selected-tag').length) {
                         // update selectedTags + status
                         if (e.target.nodeName === 'IMG') {
+                            if (e.target.parentNode.parentNode) {
+                                e.target.parentNode.parentNode.classList.remove('selected-tag')
+                                e.target.parentNode.parentNode.classList.add('tag-item')
+                                this.selectedTags = this.Tags.removeFromSelectedTags(e.target.parentNode.parentNode)
+                            }
                             // update element's class
-                        e.target.parentNode.parentNode.classList.remove('selected-tag')
-                        e.target.parentNode.parentNode.classList.add('tag-item')
-                            this.selectedTags = this.Tags.removeFromSelectedTags(e.target.parentNode.parentNode)
                         } else if (e.target.nodeName === 'DIV' ) {
-                            e.target.parentNode.classList.remove('selected-tag')
-                        e.target.parentNode.classList.add('tag-item')
-                            this.selectedTags = this.Tags.removeFromSelectedTags(e.target.parentNode)
+                            if (e.target.parentNode) {
+                                e.target.parentNode.classList.remove('selected-tag')
+                                e.target.parentNode.classList.add('tag-item')
+                                this.selectedTags = this.Tags.removeFromSelectedTags(e.target.parentNode)
+                            }
                         } else {
                             if (this.selectedTags.includes(e.target.innerText.trim())) {
                                 // update element's class
