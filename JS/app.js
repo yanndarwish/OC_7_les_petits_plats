@@ -89,13 +89,17 @@ class App {
                         // update selectedTags + status
                         if (e.target.nodeName === 'IMG') {
                             // update element's class
+                            if (e.target.parentNode.parentNode) {
                         e.target.parentNode.parentNode.classList.remove('selected-tag')
                         e.target.parentNode.parentNode.classList.add('tag-item')
                             this.selectedTags = this.Tags.removeFromSelectedTags(e.target.parentNode.parentNode)
+                            }
                         } else if (e.target.nodeName === 'DIV' ) {
+                            if (e.target.parentNode) {
                             e.target.parentNode.classList.remove('selected-tag')
                         e.target.parentNode.classList.add('tag-item')
                             this.selectedTags = this.Tags.removeFromSelectedTags(e.target.parentNode)
+                            }
                         } else {
                             if (this.selectedTags.includes(e.target.innerText.trim())) {
                                 // update element's class
