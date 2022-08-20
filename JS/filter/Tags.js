@@ -123,7 +123,6 @@ class Tags {
     }
     // add selected Tag
     addSelectedTag(e) {
-        console.log('adding')
         this.selectedTags.push(e.target.innerText.trim())
         const closeIcon = `<div class="close-icon flex center">
             <img src="./assets/icons/times-solid.svg" class="clock-icon" alt="icon">
